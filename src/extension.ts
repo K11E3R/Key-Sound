@@ -52,36 +52,18 @@ export function activate(context: vscode.ExtensionContext) {
         })
     );
 
-    // Terminal sound — listens to onDidWriteTerminalData (proposed API).
-    // Wrapped in try/catch: VS Code throws at property-access time if the
-    // extension hasn't declared the proposal in enabledApiProposals, which
-    // would abort activation entirely and silence all sounds.
-    try {
-        const termDisposable = (vscode.window as any).onDidWriteTerminalData?.(
-            (e: { terminal: vscode.Terminal; data: string }) => {
-                const cfg = vscode.workspace.getConfiguration('keySound');
-                if (!cfg.get<boolean>('enabled', true))             { return; }
-                if (!cfg.get<boolean>('playTerminalSound', true))   { return; }
-
-                // Strip ANSI/VT escape sequences
-                // eslint-disable-next-line no-control-regex
-                const clean = e.data.replace(/\x1b(?:\[[0-9;]*[A-Za-z]|\][^\x07]*\x07|[()][AB012]|.)/g, '');
-
-                if (clean === '\x7f' || clean === '\x08') {
-                    soundManager?.play('delete');
-                } else if (clean === '\r' || clean === '\r\n' || clean === '\n') {
-                    soundManager?.play('enter');
-                } else if (clean.length === 1 && clean.charCodeAt(0) >= 0x20) {
-                    soundManager?.play('key');
-                }
-            }
-        );
-        if (termDisposable) {
-            context.subscriptions.push(termDisposable);
-        }
-    } catch {
-        // onDidWriteTerminalData not available in this VS Code build — terminal sounds disabled
-    }
+    // Terminal sound — uses stable VS Code 1.93+ shell integration API.
+    // onDidWriteTerminalData (proposed API) is permanently blocked for installed
+    // extensions. Instead, onDidStartTerminalShellExecution fires whenever the
+    // user presses Enter to execute a command in any shell-integration terminal.
+    context.subscriptions.push(
+        vscode.window.onDidStartTerminalShellExecution(() => {
+            const cfg = vscode.workspace.getConfiguration('keySound');
+            if (!cfg.get<boolean>('enabled', true))           { return; }
+            if (!cfg.get<boolean>('playTerminalSound', true)) { return; }
+            soundManager?.play('enter');
+        })
+    );
 
     // Commands + config watcher
     context.subscriptions.push(

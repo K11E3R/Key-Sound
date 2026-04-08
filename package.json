@@ -2,7 +2,7 @@
   "name": "key-sound",
   "displayName": "Key Sound",
   "description": "Satisfying keyboard sounds as you write code in VS Code",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "publisher": "k11e3r",
   "repository": {
     "type": "git",
@@ -10,10 +10,14 @@
   },
   "icon": "icons/icon.png",
   "engines": {
-    "vscode": "^1.85.0"
+    "vscode": "^1.93.0"
   },
-  "categories": ["Other"],
-  "activationEvents": ["onStartupFinished"],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "viewsContainers": {
@@ -55,7 +59,12 @@
         },
         "keySound.theme": {
           "type": "string",
-          "enum": ["mechanical", "typewriter", "bubble", "soft"],
+          "enum": [
+            "mechanical",
+            "typewriter",
+            "bubble",
+            "soft"
+          ],
           "enumDescriptions": [
             "Crisp mechanical keyboard clicks",
             "Classic typewriter clacks",
@@ -85,7 +94,7 @@
         "keySound.playTerminalSound": {
           "type": "boolean",
           "default": true,
-          "description": "Play sounds when typing in the integrated terminal (uses echoed keypress detection)"
+          "description": "Play a sound when executing a command in the integrated terminal (requires shell integration)"
         }
       }
     }
@@ -98,8 +107,8 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.85.0",
     "@types/node": "^20.0.0",
+    "@types/vscode": "^1.93.0",
     "typescript": "^5.3.2"
   }
 }

@@ -315,7 +315,7 @@ input:checked+.sl2::before{transform:translateX(14px)}
   <label class="sw2"><input type="checkbox" id="pasteToggle" onchange="onOpt('playPasteSound',this.checked)"><span class="sl2"></span></label>
 </div>
 <div class="mrow">
-  <span class="mlbl">🖥️&nbsp; Terminal sound</span>
+  <span class="mlbl">🖥️&nbsp; Terminal (cmd exec)</span>
   <label class="sw2"><input type="checkbox" id="termToggle" onchange="onOpt('playTerminalSound',this.checked)"><span class="sl2"></span></label>
 </div>
 
