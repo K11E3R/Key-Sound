@@ -8,7 +8,24 @@
     "type": "git",
     "url": "https://github.com/K11E3R/Key-Sound"
   },
+  "homepage": "https://github.com/K11E3R/Key-Sound",
+  "bugs": {
+    "url": "https://github.com/K11E3R/Key-Sound/issues"
+  },
   "icon": "icons/icon.png",
+  "galleryBanner": {
+    "color": "#1e1e2e",
+    "theme": "dark"
+  },
+  "keywords": [
+    "sound",
+    "keyboard",
+    "audio",
+    "typing",
+    "mechanical",
+    "fun",
+    "productivity"
+  ],
   "engines": {
     "vscode": "^1.93.0"
   },
