@@ -2,8 +2,8 @@
 
 > Satisfying keyboard sounds as you write code in VS Code
 
-![Version](https://img.shields.io/badge/version-0.4.0-blue)
-![VS Code](https://img.shields.io/badge/vscode-^1.85.0-blue)
+![Version](https://img.shields.io/badge/version-0.5.1-blue)
+![VS Code](https://img.shields.io/badge/vscode-%5E1.93.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
@@ -12,7 +12,7 @@
 
 - **4 sound themes** — Mechanical, Typewriter, Bubble, Soft
 - **Per-event sounds** — distinct sounds for typing, Enter, Backspace/Delete, Save (Ctrl+S), and Paste
-- **Terminal sounds** — detects keystrokes echoed in the integrated terminal
+- **Terminal sounds** — plays a sound when you execute a command in the integrated terminal (shell integration)
 - **Live equalizer** — animated waveform reacts to every keystroke in real time
 - **Session stats** — tracks keys typed, lines added, deletes, and saves
 - **Works everywhere in VS Code** — code editors, rename inputs, search boxes, git commit messages
@@ -24,7 +24,7 @@
 1. Install the extension from a `.vsix` file:
    - Open the **Extensions** sidebar (`Ctrl+Shift+X`)
    - Click `···` → **Install from VSIX…**
-   - Select `key-sound-0.4.0.vsix`
+   - Select `key-sound-0.5.1.vsix`
 
 2. The **Key Sound** panel opens automatically in the Activity Bar on first launch.
 
@@ -47,7 +47,7 @@ Click the **🎹** icon in the Activity Bar to access:
 | **Volume slider** | 0–100% |
 | **Save sound** toggle | Chime on Ctrl+S |
 | **Paste sound** toggle | Burst of clicks on paste / AI completion |
-| **Terminal sound** toggle | Sounds when typing in the integrated terminal |
+| **Terminal sound** toggle | Sound on command execution in the integrated terminal (requires shell integration) |
 | **Session Stats** | Keys / Lines / Deletes / Saves counter |
 
 ---
@@ -102,9 +102,11 @@ The extension hooks into:
 - The VS Code **`type` command** (one event per keystroke in editors)
 - `onDidChangeTextDocument` (deletions, pastes, AI completions)
 - `onDidSaveTextDocument` (save chime)
-- `window.onDidWriteTerminalData` (terminal keystrokes via shell echo detection)
+- `window.onDidStartTerminalShellExecution` (fires on Enter/command execution in the terminal)
 
-> **Note:** Copilot Chat and other webview panels (browser preview, etc.) are sandboxed by VS Code and cannot be intercepted by any extension.
+> **Terminal note:** VS Code's `onDidWriteTerminalData` is a permanently-proposed API and cannot be used by installed extensions. Terminal sounds therefore fire on command execution rather than per-keystroke. Shell integration must be active in the terminal (enabled by default for bash, zsh, fish, PowerShell).
+
+> **General note:** Copilot Chat and other webview panels (browser preview, etc.) are sandboxed by VS Code and cannot be intercepted by any extension.
 
 ---
 
