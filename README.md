@@ -2,7 +2,7 @@
 
 > Satisfying keyboard sounds as you write code in VS Code
 
-![Version](https://img.shields.io/badge/version-0.5.1-blue)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![VS Code](https://img.shields.io/badge/vscode-%5E1.93.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -24,7 +24,7 @@
 1. Install the extension from a `.vsix` file:
    - Open the **Extensions** sidebar (`Ctrl+Shift+X`)
    - Click `···` → **Install from VSIX…**
-   - Select `key-sound-0.5.1.vsix`
+   - Select `key-sound-1.0.0.vsix`
 
 2. The **Key Sound** panel opens automatically in the Activity Bar on first launch.
 
