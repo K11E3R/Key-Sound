@@ -1,0 +1,101 @@
+{
+  "name": "key-sound",
+  "displayName": "Key Sound",
+  "description": "Satisfying keyboard sounds as you write code in VS Code",
+  "version": "0.4.0",
+  "publisher": "fun-features",
+  "icon": "icons/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "keySoundContainer",
+          "title": "Key Sound",
+          "icon": "icons/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "keySoundContainer": [
+        {
+          "type": "webview",
+          "id": "keySound.settingsView",
+          "name": "Key Sound"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "keySound.toggle",
+        "title": "Key Sound: Toggle On/Off",
+        "icon": "$(unmute)"
+      },
+      {
+        "command": "keySound.setTheme",
+        "title": "Key Sound: Change Sound Theme"
+      }
+    ],
+    "configuration": {
+      "title": "Key Sound",
+      "properties": {
+        "keySound.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable keyboard sounds"
+        },
+        "keySound.theme": {
+          "type": "string",
+          "enum": ["mechanical", "typewriter", "bubble", "soft"],
+          "enumDescriptions": [
+            "Crisp mechanical keyboard clicks",
+            "Classic typewriter clacks",
+            "Bubbly popping sounds",
+            "Gentle quiet taps"
+          ],
+          "default": "mechanical",
+          "description": "Sound theme"
+        },
+        "keySound.volume": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.5,
+          "description": "Volume level (0 = silent, 1 = maximum)"
+        },
+        "keySound.playSaveSound": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play a sound when saving a file"
+        },
+        "keySound.playPasteSound": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play a sound when pasting multi-character text"
+        },
+        "keySound.playTerminalSound": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play sounds when typing in the integrated terminal (uses echoed keypress detection)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.2"
+  }
+}

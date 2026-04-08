@@ -1,0 +1,27 @@
+# Build output
+out/
+
+# Dependencies
+node_modules/
+
+# Packaged extension files (old builds — keep only latest in releases)
+*.vsix
+
+# Compiled JS for source files — tracked via out/ above
+*.js.map
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+*.code-workspace
+
+# npm
+package-lock.json
+
+# Test output
+.vscode-test/
