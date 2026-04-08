@@ -1,4 +1,4 @@
-# 🎹 Key Sound
+# 🎹 Key Sound Pro
 
 > Satisfying keyboard sounds as you write code in VS Code
 

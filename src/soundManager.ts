@@ -254,7 +254,7 @@ input:checked+.sl2::before{transform:translateX(14px)}
 <div class="hdr">
   <span class="hdr-icon">🎹</span>
   <div>
-    <div class="hdr-title">Key Sound</div>
+    <div class="hdr-title">Key Sound Pro</div>
     <div class="hdr-sub">Sounds while you code &mdash; by k11e3r</div>
   </div>
 </div>
