@@ -1,28 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <!-- Background -->
-  <rect width="128" height="128" rx="20" fill="#1e1e2e"/>
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
   <!-- Keyboard body -->
-  <rect x="12" y="50" width="76" height="44" rx="8" fill="#2d2d44" stroke="#444466" stroke-width="1.5"/>
+  <rect x="1" y="7" width="16" height="11" rx="2" stroke="white" stroke-width="1.4"/>
 
-  <!-- Row 1: 5 keys -->
-  <rect x="19" y="58" width="11" height="9" rx="2.5" fill="#45475a"/>
-  <rect x="33" y="58" width="11" height="9" rx="2.5" fill="#45475a"/>
-  <rect x="47" y="58" width="11" height="9" rx="2.5" fill="#45475a"/>
-  <rect x="61" y="58" width="11" height="9" rx="2.5" fill="#45475a"/>
-  <rect x="75" y="58" width="8"  height="9" rx="2.5" fill="#45475a"/>
+  <!-- Row 1: 4 keys -->
+  <rect x="3"   y="9.5" width="3" height="2.5" rx="0.6" fill="white"/>
+  <rect x="7"   y="9.5" width="3" height="2.5" rx="0.6" fill="white"/>
+  <rect x="11"  y="9.5" width="3" height="2.5" rx="0.6" fill="white"/>
 
-  <!-- Row 2: highlighted key + others -->
-  <rect x="19" y="71" width="11" height="9" rx="2.5" fill="#45475a"/>
-  <rect x="33" y="71" width="11" height="9" rx="2.5" fill="#45475a"/>
-  <rect x="47" y="71" width="25" height="9" rx="2.5" fill="#89b4fa"/>
-  <rect x="75" y="71" width="8"  height="9" rx="2.5" fill="#45475a"/>
+  <!-- Row 2: spacebar -->
+  <rect x="3.5" y="13.5" width="11" height="2.5" rx="0.6" fill="white"/>
 
-  <!-- Row 3: spacebar -->
-  <rect x="24" y="84" width="52" height="6" rx="2.5" fill="#585b70"/>
-
-  <!-- Sound waves (right side) -->
-  <path d="M 100 57 Q 110 64 100 71" stroke="#89b4fa" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <path d="M 106 50 Q 120 64 106 78" stroke="#89b4fa" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.65"/>
-  <path d="M 112 43 Q 128 64 112 85" stroke="#89b4fa" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.35"/>
+  <!-- Sound waves -->
+  <path d="M 20 9.5 Q 22.5 12 20 14.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M 21.5 7.5 Q 25 12 21.5 16.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.55"/>
 </svg>

@@ -52,33 +52,36 @@ export function activate(context: vscode.ExtensionContext) {
         })
     );
 
-    // Terminal sound — listens to onDidWriteTerminalData.
-    // Shells echo typed characters back one-at-a-time; command output arrives
-    // as larger bursts. We use that to distinguish keystrokes from output:
-    //   • 1 printable char              → 'key'
-    //   • \r / \r\n (after ANSI strip) → 'enter'
-    //   • \x7f or \x08                 → 'delete' (backspace)
-    //   • anything longer               → skip (output burst)
-    context.subscriptions.push(
-        (vscode.window as any).onDidWriteTerminalData?.((e: { terminal: vscode.Terminal; data: string }) => {
-            const cfg = vscode.workspace.getConfiguration('keySound');
-            if (!cfg.get<boolean>('enabled', true))             { return; }
-            if (!cfg.get<boolean>('playTerminalSound', true))   { return; }
+    // Terminal sound — listens to onDidWriteTerminalData (proposed API).
+    // Wrapped in try/catch: VS Code throws at property-access time if the
+    // extension hasn't declared the proposal in enabledApiProposals, which
+    // would abort activation entirely and silence all sounds.
+    try {
+        const termDisposable = (vscode.window as any).onDidWriteTerminalData?.(
+            (e: { terminal: vscode.Terminal; data: string }) => {
+                const cfg = vscode.workspace.getConfiguration('keySound');
+                if (!cfg.get<boolean>('enabled', true))             { return; }
+                if (!cfg.get<boolean>('playTerminalSound', true))   { return; }
 
-            // Strip ANSI/VT escape sequences
-            // eslint-disable-next-line no-control-regex
-            const clean = e.data.replace(/\x1b(?:\[[0-9;]*[A-Za-z]|\][^\x07]*\x07|[()][AB012]|.)/g, '');
+                // Strip ANSI/VT escape sequences
+                // eslint-disable-next-line no-control-regex
+                const clean = e.data.replace(/\x1b(?:\[[0-9;]*[A-Za-z]|\][^\x07]*\x07|[()][AB012]|.)/g, '');
 
-            if (clean === '\x7f' || clean === '\x08') {
-                soundManager?.play('delete');
-            } else if (clean === '\r' || clean === '\r\n' || clean === '\n') {
-                soundManager?.play('enter');
-            } else if (clean.length === 1 && clean.charCodeAt(0) >= 0x20) {
-                soundManager?.play('key');
+                if (clean === '\x7f' || clean === '\x08') {
+                    soundManager?.play('delete');
+                } else if (clean === '\r' || clean === '\r\n' || clean === '\n') {
+                    soundManager?.play('enter');
+                } else if (clean.length === 1 && clean.charCodeAt(0) >= 0x20) {
+                    soundManager?.play('key');
+                }
             }
-            // else: multi-char = command output → no sound
-        }) ?? { dispose: () => { /* onDidWriteTerminalData not available */ } }
-    );
+        );
+        if (termDisposable) {
+            context.subscriptions.push(termDisposable);
+        }
+    } catch {
+        // onDidWriteTerminalData not available in this VS Code build — terminal sounds disabled
+    }
 
     // Commands + config watcher
     context.subscriptions.push(

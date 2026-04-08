@@ -110,4 +110,4 @@ The extension hooks into:
 
 ## License
 
-MIT © fun-features
+MIT © k11e3r
