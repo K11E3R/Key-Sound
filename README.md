@@ -112,4 +112,4 @@ The extension hooks into:
 
 ## License
 
-MIT © k11e3r
+MIT © k11e3r — published by yna
