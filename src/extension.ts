@@ -5,6 +5,8 @@ let soundManager: SoundManager | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
     soundManager = new SoundManager(context);
+    const vimExtensionId = 'vscodevim.vim';
+    const hasVimExtension = vscode.extensions.getExtension(vimExtensionId) !== undefined;
 
     // Register the sidebar settings + audio view
     context.subscriptions.push(
@@ -20,16 +22,18 @@ export function activate(context: vscode.ExtensionContext) {
     // Wrapped in try/catch in case another extension (e.g. vscodevim) already
     // owns this command — in that case we fall back to onDidChangeTextDocument.
     let typeCommandRegistered = false;
-    try {
-        context.subscriptions.push(
-            vscode.commands.registerCommand('type', async (args: { text: string }) => {
-                soundManager?.handleType(args.text);
-                return vscode.commands.executeCommand('default:type', args);
-            })
-        );
-        typeCommandRegistered = true;
-    } catch {
-        // fallback handled in onDidChangeTextDocument
+    if (!hasVimExtension) {
+        try {
+            context.subscriptions.push(
+                vscode.commands.registerCommand('type', async (args: { text: string }) => {
+                    soundManager?.handleType(args.text);
+                    return vscode.commands.executeCommand('default:type', args);
+                })
+            );
+            typeCommandRegistered = true;
+        } catch {
+            // fallback handled in onDidChangeTextDocument
+        }
     }
 
     // onDidChangeTextDocument handles:
