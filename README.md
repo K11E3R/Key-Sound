@@ -23,7 +23,7 @@ Add satisfying keyboard sounds to Visual Studio Code while you write, paste, sav
 
 Install **Key Sound Pro** from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=yna.key-sound-pro) and reload VS Code when prompted.
 
-The extension activates automatically after startup. On first use, open the **Key Sound** view in the Activity Bar and click the audio activation control. Browsers and VS Code require a user gesture before audio can play.
+The extension activates automatically after startup, but its audio engine initializes when the **Key Sound** view is opened. Open this view in the Activity Bar in each VS Code window/session, including after a reload, and click **Tap to activate audio** if audio is not already active. The view can then be hidden for the rest of that session.
 
 ## Usage
 
